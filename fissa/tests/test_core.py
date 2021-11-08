@@ -484,6 +484,10 @@ class ExperimentTestMixin:
         self.compare_str_repr_contents(repr(exp))
 
     def test_imagelistloaded_roizip(self):
+        image_path = os.path.join(self.resources_dir, self.images_dir)
+        roi_path = os.path.join(self.resources_dir, self.roi_zip_path)
+        exp = core.Experiment(image_path, roi_path, self.output_dir, datahandler_custom=datahandler)
+        exp.separate()
         image_paths = [os.path.join(self.images_dir, img) for img in self.image_names]
         datahandler = extraction.DataHandlerTifffile()
         images = [datahandler.image2array(pth) for pth in image_paths]
